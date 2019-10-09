@@ -27,3 +27,27 @@ end
 
 bubble_sort([4,3,78,2,0,2]) # [0,2,2,3,4,78]
 bubble_sort([23, 8, 12, 0, 12, 7, 2, 4, 10, 1]) # [0, 1, 2, 4, 7, 8, 10, 12, 12, 23]
+
+def bubble_sort_by(arr)
+  sorted = false
+
+  while(!sorted) do
+    operation = false
+    arr.length.times do |i|
+      current_element = arr[i]
+      next_element = arr[i + 1] || current_element
+
+      if yield(current_element,next_element) > 0
+        arr[i] = next_element
+        arr[i + 1] = current_element
+        operation = true
+      end
+    end
+    break unless sorted
+  end
+  puts "#{arr}"
+end
+
+bubble_sort_by(["hi","hello","hey"]) do |left,right|
+  left.length - right.length
+end
